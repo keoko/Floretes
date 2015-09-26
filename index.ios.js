@@ -19,25 +19,25 @@ var IMG_SERVER_URL = 'http://www.nelsonsnaturalworld.com/~/media/images/nelsonsd
 var FLOWERS = [
   {name: 'heather',
    description: 'Those who are always seeking the companionship of anyone who may be available, as they find it necessary to discuss their own affairs with others, no matter who it may be. They are very unhappy if they have to be alone for any length of time.',
-   image: IMG_SERVER_URL + 'heather.gif',
+   image: require('image!heather'),
   },
   {name: 'white chestnut',
    description: 'For those who cannot prevent thoughts, ideas, arguments which they do not desire from entering their minds. Usually at such times when the interest of the moment is not strong enough to keep the mind full. Thoughts which worry and still remain, or if for a time thrown out, will return. They seem to circle round and round and cause mental torture. The presence of such unpleasant thoughts drives out peace and interferes with being able to think only of the work or pleasure of the day.',
-   image: IMG_SERVER_URL + 'white chestnut.gif',
+   image: require('image!white_chestnut'),
   },
   {name: 'olive',
    description: 'Those who have suffered much mentally or physically and are so exhausted and weary that they feel they have no more strength to make any effort. Daily life is hard work for them, without pleasure',
-   image: IMG_SERVER_URL + 'olive.gif',
+   image: require('image!olive'),
   },
   {name: 'red chestnut',
    description: 'For those who find it difficult not to be anxious for other people. Often they have ceased to worry about themselves, but for those of whom they are fond they may suffer much, frequently anticipating that some unfortunate thing may happen to them.',
-   image: IMG_SERVER_URL + 'red chestnut.gif',
+   image: require('image!red_chestnut'),
   },
   {name: 'holly',
    description: 'For those who are sometimes attacked by thoughts of such kind as jealousy, envy, revenge, suspicion. For the different forms of vexation. Within themselves they may suffer much, often when there is no real cause for their unhappiness',
-   image: IMG_SERVER_URL + 'holly.gif',
+   image: require('image!holly'),
   },
-  ];
+];
 
 var Floretes = React.createClass({
   getInitialState: function() {
@@ -88,7 +88,7 @@ var Floretes = React.createClass({
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: flower.image}}
+          source={flower.image}
           style={styles.image}
         />
         <View style={styles.rightContainer}>
