@@ -14,11 +14,30 @@ var {
   View,
 } = React;
 
-var API_KEY = '7waqfqbprs7pajbz28mqf6vz';
-var API_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json';
-var PAGE_SIZE = 25;
-var PARAMS = '?apikey=' + API_KEY + '&page_limit=' + PAGE_SIZE;
-var REQUEST_URL = API_URL + PARAMS;
+
+var IMG_SERVER_URL = 'http://www.nelsonsnaturalworld.com/~/media/images/nelsonsdesktop/bach/remedies/';
+var FLOWERS = [
+  {name: 'heather',
+   description: 'Those who are always seeking the companionship of anyone who may be available, as they find it necessary to discuss their own affairs with others, no matter who it may be. They are very unhappy if they have to be alone for any length of time.',
+   image: IMG_SERVER_URL + 'heather.gif',
+  },
+  {name: 'white chestnut',
+   description: 'For those who cannot prevent thoughts, ideas, arguments which they do not desire from entering their minds. Usually at such times when the interest of the moment is not strong enough to keep the mind full. Thoughts which worry and still remain, or if for a time thrown out, will return. They seem to circle round and round and cause mental torture. The presence of such unpleasant thoughts drives out peace and interferes with being able to think only of the work or pleasure of the day.',
+   image: IMG_SERVER_URL + 'white chestnut.gif',
+  },
+  {name: 'olive',
+   description: 'Those who have suffered much mentally or physically and are so exhausted and weary that they feel they have no more strength to make any effort. Daily life is hard work for them, without pleasure',
+   image: IMG_SERVER_URL + 'olive.gif',
+  },
+  {name: 'red chestnut',
+   description: 'For those who find it difficult not to be anxious for other people. Often they have ceased to worry about themselves, but for those of whom they are fond they may suffer much, frequently anticipating that some unfortunate thing may happen to them.',
+   image: IMG_SERVER_URL + 'red chestnut.gif',
+  },
+  {name: 'holly',
+   description: 'For those who are sometimes attacked by thoughts of such kind as jealousy, envy, revenge, suspicion. For the different forms of vexation. Within themselves they may suffer much, often when there is no real cause for their unhappiness',
+   image: IMG_SERVER_URL + 'holly.gif',
+  },
+  ];
 
 var Floretes = React.createClass({
   getInitialState: function() {
@@ -35,15 +54,10 @@ var Floretes = React.createClass({
   },
 
   fetchData: function() {
-    fetch(REQUEST_URL)
-      .then((response) => response.json())
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
-          loaded: true,
-        });
-      })
-      .done();
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(FLOWERS),
+      loaded: true,
+    });
   },
 
   render: function() {
@@ -64,22 +78,22 @@ var Floretes = React.createClass({
     return (
       <View style={styles.container}>
         <Text>
-          Loading movies...
+          Loading flowers...
         </Text>
       </View>
     );
   },
 
-  renderMovie: function(movie) {
+  renderMovie: function(flower) {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
-          style={styles.thumbnail}
+          source={{uri: flower.image}}
+          style={styles.image}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
+          <Text style={styles.name}>{flower.name}</Text>
+          <Text style={styles.description}>{flower.description}</Text>
         </View>
       </View>
     );
@@ -97,15 +111,15 @@ var styles = StyleSheet.create({
   rightContainer: {
     flex: 1,
   },
-  title: {
+  name: {
     fontSize: 20,
     marginBottom: 8,
     textAlign: 'center',
   },
-  year: {
+  description: {
     textAlign: 'center',
   },
-  thumbnail: {
+  image: {
     width: 53,
     height: 81,
   },
